@@ -1,55 +1,105 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <title>Галилеогалилео</title>
-  <script type="module" crossorigin src="/assets/index-D6EmMC1T.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DSKx13MD.css">
-</head>
-<body class="gradient-background">
-  <div class="sliding-background-container">
-    <div class="sliding-background">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="The cat counter provides a convenient way to store and count your cat photos">
+    <meta name="keywords" content="Cats, Photos">
+    <meta property="og:title" content="Cat counter">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Галилеогалилео</title>
+    <script type="module" crossorigin src="/assets/index-D9gHVMgh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C2laMA_z.css">
+  </head>
+  <body class="bg-my-gradient">
+    <div class="bg-my-sliding-container">
+      <div class="bg-my-sliding"></div>
+    </div>
+    <button id="btnTheme" class="my-pin-tr bd-theme" data-bs-theme-value="dark">☀︎</button>
+    <main class="container">
+      <div class="my-spacer-400px"></div>
+      <h1 id="catCounter" class="text-center">0 котов...</h1>
 
-    </div>
-  </div>
-    <button id="btn-theme">☀︎</button>
-  <main>
-    <div class="big-space"></div>
-    <h1 id="counter">0 котов...</h1>
-    <div class="form">
-      <input id="inp-title" placeholder="Название">
-      <input id="inp-category" placeholder="Категория">
-      <input id="inp-image" placeholder="URL">
-      <button id="btn-submit">Добавить</button>
-      <input id="cb-clear" value="1" type="checkbox">Очищать
-    </div>
-    <div class="form">
-      <input id="inp-search" placeholder="Поиск" style="display: none;">
-    </div>
-    <div id="cards">
+      <!-- add form -->
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col">
+            <label for="fAddName" class="form-label">Название</label>
+            <input type="text" class="form-control" id="fAddName" placeholder="имя кота">
+          </div>
+          <div class="col">
+            <label for="fAddCategory" class="form-label">Категория</label>
+            <input type="text" class="form-control" id="fAddCategory" placeholder="пушистые">
+          </div>
+          <div class="col">
+            <label for="fAddUrl" class="form-label">Ссылка</label>
+            <input class="form-control" list="fAddUrlOptions" id="fAddUrl" placeholder="cat0.jpg">
+            <datalist id="fAddUrlOptions">
+              <option value="cat0.jpg"></option>
+              <option value="cat1.jpg"></option>
+              <option value="cat2.jpg"></option>
+              <option value="cat3.jpg"></option>
+              <option value="cat4.jpg"></option>
+              <option value="cat5.jpg"></option>
+              <option value="cat6.jpg"></option>
+            </datalist>
+          </div>
+          <div class="col align-content-end">
+            <div class="align-content-center">
+              <button type="button" class="btn btn-primary align-end" id="fAddSubmit">Добавить</button>
+              <input class="form-check-input align-middle" type="checkbox" value="" id="fAddClear">
+              <label class="form-check-label align-middle" for="fAddClear">Очищать</label>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    </div>
-    <div class="big-space"></div>
-  </main>
-  <div id="modal-container" style="display: none;">
-    <div class="modal" id="modal-msg" style="display: none">
-      <div id="modal-title">Упс</div>
-      <div id="modal-desc">Описание описание</div>
-      <button class="btn-close">Ок</button>
-    </div>
-    <div class="modal" id="modal-card" style="display: none">
-      <div id="modal-card-title">Название</div>
-      <img id="modal-card-img" src="/p.png" alt="Картинка из галереи"><br>
-      <div class="modal-buttons">
-        <button id="btn-delete">Удалить</button>
-        <div class="flex-spacer"></div>
-        <button id="btn-fav">В избранное</button>
-        <div class="flex-spacer"></div>
-        <button class="btn-close">Ок</button>
+      <!-- search -->
+      <div class="my-spacer-50px"></div>
+      <div class="row">
+        <label for="fSearch" class="form-label">Поиск</label>
+        <input type="text" class="form-control" id="fSearch" placeholder="поиск...">
+      </div>
+
+      <!-- cards -->
+      <div id="cards"></div>
+
+      <div class="my-spacer-400px"></div>
+    </main>
+    <!-- modal message box -->
+    <div class="modal" id="mdlMsg" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+
+    <!-- modal card -->
+    <div class="modal" id="mdlCard" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="/p.png" alt="Картинка из галереи" id="mdlCardImg" class="mb-4"><br>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-danger" id="mdlCardDelete" data-bs-dismiss="modal">Удалить</button>
+              <button type="button" class="btn btn-warning" id="mdlCardFav">В избранное</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
 </html>
